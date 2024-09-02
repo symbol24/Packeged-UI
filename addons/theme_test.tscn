@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1sofyasa7ccd"]
+
+[ext_resource type="Script" path="res://addons/PackedUi/Code/wrappers/credits_rich_text_label.gd" id="1_2o0cs"]
+[ext_resource type="Theme" uid="uid://cpqt1hqsijy37" path="res://addons/PackedUi/default_theme.tres" id="1_lwr20"]
+
+[node name="Theme Test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button_normal" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 872.0
+offset_top = 42.0
+offset_right = 1093.0
+offset_bottom = 88.0
+theme = ExtResource("1_lwr20")
+text = "Normal Button"
+
+[node name="button_toggle" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 0
+offset_left = 872.0
+offset_top = 92.0
+offset_right = 1078.0
+offset_bottom = 138.0
+theme = ExtResource("1_lwr20")
+toggle_mode = true
+text = "Toggle Button"
+
+[node name="button_disabled" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 0
+offset_left = 872.0
+offset_top = 142.0
+offset_right = 1072.0
+offset_bottom = 177.0
+theme = ExtResource("1_lwr20")
+disabled = true
+text = "Disabled Button"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 326.0
+offset_right = 138.0
+offset_bottom = 349.0
+theme = ExtResource("1_lwr20")
+theme_type_variation = &"CreditsLabel"
+text = "Label"
+
+[node name="CreditsRichText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 43.0
+offset_right = 828.0
+offset_bottom = 158.0
+theme = ExtResource("1_lwr20")
+theme_type_variation = &"CreditsRichText"
+text = "CreditsRichTextLabel"
+scroll_active = false
+script = ExtResource("1_2o0cs")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 170.0
+offset_right = 713.0
+offset_bottom = 267.0
+theme = ExtResource("1_lwr20")
+text = "RichTextLabel"
+scroll_active = false

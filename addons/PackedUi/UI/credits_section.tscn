@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://q4omh0x04om6"]
+
+[ext_resource type="Script" path="res://addons/PackedUi/Code/credits_section.gd" id="1_vsdrq"]
+[ext_resource type="Theme" uid="uid://cpqt1hqsijy37" path="res://addons/PackedUi/default_theme.tres" id="2_ehe2w"]
+[ext_resource type="Script" path="res://addons/PackedUi/Code/wrappers/credits_rich_text_label.gd" id="3_i7v3l"]
+
+[node name="CreditsSection" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vsdrq")
+
+[node name="section_name" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme = ExtResource("2_ehe2w")
+theme_type_variation = &"CreditsRichText"
+bbcode_enabled = true
+text = "test"
+scroll_active = false
+script = ExtResource("3_i7v3l")
+
+[node name="spacer" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="grid_of_logos" type="GridContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="grid_of_names" type="GridContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3

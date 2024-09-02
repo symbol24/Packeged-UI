@@ -1,0 +1,184 @@
+[gd_scene load_steps=12 format=3 uid="uid://bd3dj73fu4rt6"]
+
+[ext_resource type="Script" path="res://addons/PackedUi/Code/ui.gd" id="1_j1lf8"]
+[ext_resource type="Script" path="res://addons/PackedUi/Code/main_menu.gd" id="2_dhl62"]
+[ext_resource type="Theme" uid="uid://cpqt1hqsijy37" path="res://addons/PackedUi/default_theme.tres" id="3_ohvov"]
+[ext_resource type="Script" path="res://addons/PackedUi/Code/options_menu.gd" id="4_wx7w4"]
+[ext_resource type="Script" path="res://addons/PackedUi/Code/credits.gd" id="5_6nx8t"]
+[ext_resource type="Script" path="res://addons/PackedUi/Code/credits_section_data.gd" id="6_86k27"]
+[ext_resource type="Script" path="res://addons/PackedUi/Code/player_ui.gd" id="6_im37q"]
+[ext_resource type="Resource" uid="uid://cj8cddje77ep4" path="res://addons/PackedUi/Credit Datas/demo_data.tres" id="7_5cen7"]
+[ext_resource type="Script" path="res://addons/PackedUi/Code/pause_menu.gd" id="7_r3cjq"]
+[ext_resource type="Script" path="res://addons/PackedUi/Code/result_screen.gd" id="8_p1pvi"]
+[ext_resource type="Script" path="res://addons/PackedUi/Code/popups.gd" id="9_y8v47"]
+
+[node name="Ui" type="CanvasLayer"]
+script = ExtResource("1_j1lf8")
+default_theme = ExtResource("3_ohvov")
+
+[node name="MainMenu" type="Control" parent="." node_paths=PackedStringArray("background") groups=["MainMenu"]]
+visible = false
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_dhl62")
+game_title = "MA GAME"
+menu_options = Array[String](["Play", "Settings", "Credits", "Quit"])
+background_color = Color(0.242052, 0.18342, 0.265668, 1)
+background = NodePath("background")
+id = "main_menu"
+
+[node name="background" type="ColorRect" parent="MainMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="vbox1" type="VBoxContainer" parent="MainMenu"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_constants/separation = 0
+
+[node name="spacer" type="Control" parent="MainMenu/vbox1"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="game_title_label" type="RichTextLabel" parent="MainMenu/vbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_ohvov")
+bbcode_enabled = true
+text = "[center]Game Title Here[/center]"
+scroll_active = false
+
+[node name="buttons_hbox" type="HBoxContainer" parent="MainMenu/vbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="hbox_seperator_01" type="Control" parent="MainMenu/vbox1/buttons_hbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="menu_button_vbox" type="VBoxContainer" parent="MainMenu/vbox1/buttons_hbox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 45
+
+[node name="hbox_seperator_02" type="Control" parent="MainMenu/vbox1/buttons_hbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="OptionsMenu" type="Control" parent="." node_paths=PackedStringArray("background")]
+visible = false
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+script = ExtResource("4_wx7w4")
+background_color = Color(0.390689, 0.491481, 0.64164, 1)
+background = NodePath("options_background")
+id = "options_menu"
+
+[node name="options_background" type="ColorRect" parent="OptionsMenu"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Credits" type="Control" parent="." node_paths=PackedStringArray("background")]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+script = ExtResource("5_6nx8t")
+credit_sections = Array[ExtResource("6_86k27")]([ExtResource("7_5cen7")])
+background_color = Color(0.131654, 0.250022, 0.218582, 1)
+background = NodePath("credits_background")
+id = "credits"
+
+[node name="credits_background" type="ColorRect" parent="Credits"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="credits_scroll" type="ScrollContainer" parent="Credits"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("3_ohvov")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 0
+
+[node name="credits_vbox" type="VBoxContainer" parent="Credits/credits_scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="spacer" type="Control" parent="Credits/credits_scroll/credits_vbox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="game_name_in_credits" type="RichTextLabel" parent="Credits/credits_scroll/credits_vbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme = ExtResource("3_ohvov")
+bbcode_enabled = true
+
+[node name="spacer2" type="Control" parent="Credits/credits_scroll/credits_vbox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="PlayerUI" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_im37q")
+id = "player_ui"
+
+[node name="PauseMenu" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_r3cjq")
+id = "pause_menu"
+
+[node name="ResultScreen" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_p1pvi")
+id = "result_screen"
+
+[node name="Popups" type="Control" parent="."]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_y8v47")
+id = "popups"
