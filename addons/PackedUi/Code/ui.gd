@@ -1,8 +1,8 @@
-@tool
 extends CanvasLayer
 
 signal ToggleUi(id:String, value:bool)
 signal WindowResized(_value:Vector2i)
+signal OptionUpdated(id:String, value)
 
 @export var default_theme:Theme
 

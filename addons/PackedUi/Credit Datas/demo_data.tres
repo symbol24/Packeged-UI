@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CreditSectionData" load_steps=3 format=3 uid="uid://cj8cddje77ep4"]
 
 [ext_resource type="Script" path="res://addons/PackedUi/Code/credits_section_data.gd" id="1_3lnsr"]
-[ext_resource type="Texture2D" uid="uid://ciphdoorlai41" path="res://icon.svg" id="1_inklt"]
+[ext_resource type="Texture2D" uid="uid://fk6uwgi13l4h" path="res://addons/logo.png" id="2_t4h5v"]
 
 [resource]
 script = ExtResource("1_3lnsr")
 section_name = "Packed Ui Created by"
-logo_images = Array[Resource]([ExtResource("1_inklt"), ExtResource("1_inklt"), ExtResource("1_inklt"), ExtResource("1_inklt"), ExtResource("1_inklt")])
-list_of_names = Array[String](["Symbol24", "Symbol24", "Symbol24", "Symbol24", "Symbol24", "Symbol24", "Symbol24", "Symbol24", "Symbol24", "Symbol24", "Symbol24"])
+logo_images = Array[Resource]([ExtResource("2_t4h5v")])
+list_of_names = Array[String](["Symbol24"])

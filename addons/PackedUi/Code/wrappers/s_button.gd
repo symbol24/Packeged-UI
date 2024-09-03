@@ -7,4 +7,4 @@ func _ready() -> void:
 	pressed.connect(_button_pressed)
 
 func _button_pressed():
-	main_menu.ButtonPressed.emit(id)
+	main_menu.button_pressed(id)

@@ -8,6 +8,7 @@ func _ready() -> void:
 		await UI.ready
 	size.x = UI.width
 	size.y = UI.height
+	UI.ToggleUi.connect(_toggle_control)
 	
 func _toggle_control(_id:String, _value:bool) -> void:
 	if id == "":

@@ -1,9 +1,17 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cpqt1hqsijy37"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://cpqt1hqsijy37"]
 
 [ext_resource type="StyleBox" uid="uid://ddhl8p444eumu" path="res://addons/PackedUi/default_theme/disabled_style_box.tres" id="1_yf40b"]
 [ext_resource type="StyleBox" uid="uid://wkn6jgt60p1n" path="res://addons/PackedUi/default_theme/focused_style_box.tres" id="2_gi8m2"]
 [ext_resource type="StyleBox" uid="uid://csmhkh3s34lxl" path="res://addons/PackedUi/default_theme/normal_style_box.tres" id="3_h17uv"]
 [ext_resource type="StyleBox" uid="uid://c71wvuofjw7rl" path="res://addons/PackedUi/default_theme/pressed_style_box.tres" id="4_p1mff"]
+[ext_resource type="StyleBox" uid="uid://b6rgkfwsgrkal" path="res://addons/PackedUi/default_theme/slider_grabber_area.tres" id="5_ri824"]
+[ext_resource type="StyleBox" uid="uid://cuxeeylavn8nv" path="res://addons/PackedUi/default_theme/tab_container_panel.tres" id="5_y0tlf"]
+[ext_resource type="StyleBox" uid="uid://b3ga7m5ktyrgx" path="res://addons/PackedUi/default_theme/tab_container_disabled.tres" id="6_elwxs"]
+[ext_resource type="StyleBox" uid="uid://eukpcrf5j47r" path="res://addons/PackedUi/default_theme/slider_grabber_area_highlight.tres" id="6_wecrc"]
+[ext_resource type="StyleBox" uid="uid://cmct5m8vp1nan" path="res://addons/PackedUi/default_theme/slider.tres" id="7_8wxwi"]
+[ext_resource type="StyleBox" uid="uid://dvlhdmhhq1jym" path="res://addons/PackedUi/default_theme/tab_container_focus.tres" id="7_byxuu"]
+[ext_resource type="StyleBox" uid="uid://krt46pvq164d" path="res://addons/PackedUi/default_theme/tab_container_selected.tres" id="8_7u315"]
+[ext_resource type="StyleBox" uid="uid://c616p27ee3ig5" path="res://addons/PackedUi/default_theme/tab_container_unselected.tres" id="9_bie8g"]
 
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -21,14 +29,42 @@ CreditsLabel/font_sizes/font_size = 20
 CreditsRichText/base_type = &"RichTextLabel"
 CreditsRichText/colors/default_color = Color(0.860369, 0.860369, 0.860369, 1)
 CreditsRichText/font_sizes/normal_font_size = 30
+HSlider/styles/grabber_area = ExtResource("5_ri824")
+HSlider/styles/grabber_area_highlight = ExtResource("6_wecrc")
+HSlider/styles/slider = ExtResource("7_8wxwi")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0.619608)
 Label/constants/shadow_offset_x = 3
 Label/constants/shadow_offset_y = 3
 Label/font_sizes/font_size = 16
+MenuTitle/base_type = &"RichTextLabel"
+MenuTitle/font_sizes/normal_font_size = 50
+OptionLabel/base_type = &"Label"
+OptionLabel/colors/font_color = Color(0.813267, 0.85579, 0.921727, 1)
+OptionLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
+OptionLabel/constants/shadow_offset_x = 0
+OptionLabel/constants/shadow_offset_y = 0
+OptionLabel/font_sizes/font_size = 20
+OptionsSectionLabel/base_type = &"Label"
+OptionsSectionLabel/colors/font_color = Color(0.900436, 0.923331, 0.958843, 1)
+OptionsSectionLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
+OptionsSectionLabel/constants/shadow_offset_x = 0
+OptionsSectionLabel/constants/shadow_offset_y = 0
+OptionsSectionLabel/font_sizes/font_size = 24
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.560784)
 RichTextLabel/constants/shadow_offset_x = 2
 RichTextLabel/constants/shadow_offset_y = 2
 RichTextLabel/font_sizes/normal_font_size = 72
+TabContainer/colors/font_disabled_color = Color(0, 0, 0, 0.286275)
+TabContainer/colors/font_hovered_color = Color(0.372549, 0.470588, 0.623529, 1)
+TabContainer/colors/font_selected_color = Color(0.95, 0.95, 0.95, 1)
+TabContainer/colors/font_unselected_color = Color(0.345606, 0.422101, 0.527, 1)
+TabContainer/font_sizes/font_size = 20
+TabContainer/styles/panel = ExtResource("5_y0tlf")
+TabContainer/styles/tab_disabled = ExtResource("6_elwxs")
+TabContainer/styles/tab_focus = ExtResource("7_byxuu")
+TabContainer/styles/tab_hovered = ExtResource("7_byxuu")
+TabContainer/styles/tab_selected = ExtResource("8_7u315")
+TabContainer/styles/tab_unselected = ExtResource("9_bie8g")

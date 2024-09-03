@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqnm0shec6e3q"]
+
+[ext_resource type="Script" path="res://addons/PackedUi/Code/wrappers/slider_option.gd" id="1_15tfa"]
+[ext_resource type="Theme" uid="uid://cpqt1hqsijy37" path="res://addons/PackedUi/default_theme.tres" id="2_uubfh"]
+
+[node name="slider" type="Control"]
+custom_minimum_size = Vector2(720, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 720.0
+offset_bottom = 50.0
+script = ExtResource("1_15tfa")
+
+[node name="hbox" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(720, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 0
+
+[node name="spacer2" type="Control" parent="hbox"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="name_label" type="Label" parent="hbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme = ExtResource("2_uubfh")
+theme_type_variation = &"OptionLabel"
+text = "name goes here"
+
+[node name="spacer" type="Control" parent="hbox"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="sliber_vbox" type="VBoxContainer" parent="hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="spacer" type="Control" parent="hbox/sliber_vbox"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="slider" type="HSlider" parent="hbox/sliber_vbox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_uubfh")
+max_value = 1.0
+step = 0.01

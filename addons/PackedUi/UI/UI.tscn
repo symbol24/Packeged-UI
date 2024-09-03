@@ -24,7 +24,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_dhl62")
-game_title = "MA GAME"
+game_title = "Whatever you want"
 menu_options = Array[String](["Play", "Settings", "Credits", "Quit"])
 background_color = Color(0.242052, 0.18342, 0.265668, 1)
 background = NodePath("background")
@@ -32,8 +32,9 @@ id = "main_menu"
 
 [node name="background" type="ColorRect" parent="MainMenu"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.242052, 0.18342, 0.265668, 1)
 
 [node name="vbox1" type="VBoxContainer" parent="MainMenu"]
 custom_minimum_size = Vector2(1280, 720)
@@ -51,7 +52,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("3_ohvov")
 bbcode_enabled = true
-text = "[center]Game Title Here[/center]"
+text = "[center]MA GAME[/center]"
 scroll_active = false
 
 [node name="buttons_hbox" type="HBoxContainer" parent="MainMenu/vbox1"]
@@ -88,15 +89,88 @@ anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 script = ExtResource("4_wx7w4")
+page_name = "Settings"
 background_color = Color(0.390689, 0.491481, 0.64164, 1)
 background = NodePath("options_background")
-id = "options_menu"
+id = "settings"
 
 [node name="options_background" type="ColorRect" parent="OptionsMenu"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.392157, 0.490196, 0.643137, 1)
+
+[node name="vbox" type="VBoxContainer" parent="OptionsMenu"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_constants/separation = 0
+
+[node name="spacer" type="Control" parent="OptionsMenu/vbox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="options_page_title" type="RichTextLabel" parent="OptionsMenu/vbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("3_ohvov")
+theme_type_variation = &"MenuTitle"
+bbcode_enabled = true
+text = "[center]title[/center]"
+
+[node name="hbox" type="HBoxContainer" parent="OptionsMenu/vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="spacer" type="Control" parent="OptionsMenu/vbox/hbox"]
+custom_minimum_size = Vector2(270, 30)
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="OptionsMenu/vbox/hbox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tab_alignment = 1
+current_tab = 0
+
+[node name="basics" type="Control" parent="OptionsMenu/vbox/hbox/TabContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="basics_vbox" type="VBoxContainer" parent="OptionsMenu/vbox/hbox/TabContainer/basics"]
+unique_name_in_owner = true
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="spacer" type="Control" parent="OptionsMenu/vbox/hbox/TabContainer/basics/basics_vbox"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="spacer3" type="Control" parent="OptionsMenu/vbox/hbox"]
+custom_minimum_size = Vector2(270, 30)
+layout_mode = 2
+
+[node name="spacer2" type="Control" parent="OptionsMenu/vbox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+
+[node name="option_back_btn" type="Button" parent="OptionsMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+offset_left = 1032.0
+offset_top = 637.0
+offset_right = 1232.0
+offset_bottom = 683.0
+theme = ExtResource("3_ohvov")
+text = "Back"
+
 [node name="Credits" type="Control" parent="." node_paths=PackedStringArray("background")]
+visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
 anchors_preset = 0
@@ -109,6 +183,7 @@ background = NodePath("credits_background")
 id = "credits"
 
 [node name="credits_background" type="ColorRect" parent="Credits"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -120,7 +195,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("3_ohvov")
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 0
 
 [node name="credits_vbox" type="VBoxContainer" parent="Credits/credits_scroll"]
 unique_name_in_owner = true
@@ -143,6 +217,17 @@ bbcode_enabled = true
 [node name="spacer2" type="Control" parent="Credits/credits_scroll/credits_vbox"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+
+[node name="back_btn" type="Button" parent="Credits"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 1141.0
+offset_top = 625.0
+offset_right = 1214.0
+offset_bottom = 671.0
+theme = ExtResource("3_ohvov")
+text = "Back"
 
 [node name="PlayerUI" type="Control" parent="."]
 visible = false
@@ -175,6 +260,7 @@ script = ExtResource("8_p1pvi")
 id = "result_screen"
 
 [node name="Popups" type="Control" parent="."]
+visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
 anchors_preset = 0
