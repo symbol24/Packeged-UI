@@ -32,3 +32,7 @@ enabled=PackedStringArray("res://addons/PackedUi/plugin.cfg")
 [global_group]
 
 MainMenu=""
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://addons/PackedUi/example_localization.en.translation", "res://addons/PackedUi/example_localization.fr.translation", "res://addons/PackedUi/example_localization.fr_CA.translation")

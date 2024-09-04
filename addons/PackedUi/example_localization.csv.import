@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cflgvajjgeggp"
+
+[deps]
+
+files=["res://addons/PackedUi/example_localization.en.translation", "res://addons/PackedUi/example_localization.fr.translation", "res://addons/PackedUi/example_localization.fr_CA.translation"]
+
+source_file="res://addons/PackedUi/example_localization.csv"
+dest_files=["res://addons/PackedUi/example_localization.en.translation", "res://addons/PackedUi/example_localization.fr.translation", "res://addons/PackedUi/example_localization.fr_CA.translation"]
+
+[params]
+
+compress=true
+delimiter=0

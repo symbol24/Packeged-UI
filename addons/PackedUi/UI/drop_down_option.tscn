@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://0abgeaqt4tdj"]
+
+[ext_resource type="Script" path="res://addons/PackedUi/Code/wrappers/drop_down_option.gd" id="1_np7u5"]
+[ext_resource type="Theme" uid="uid://cpqt1hqsijy37" path="res://addons/PackedUi/default_theme.tres" id="2_p3j3b"]
+
+[node name="drop_down_option" type="Control"]
+custom_minimum_size = Vector2(720, 50)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.00518)
+script = ExtResource("1_np7u5")
+
+[node name="hbox" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(720, 50)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 0
+
+[node name="spacer2" type="Control" parent="hbox"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="label_vbox" type="VBoxContainer" parent="hbox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="spacer" type="Control" parent="hbox/label_vbox"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="name_label" type="Label" parent="hbox/label_vbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme = ExtResource("2_p3j3b")
+theme_type_variation = &"OptionLabel"
+text = "name goes here"
+
+[node name="spacer" type="Control" parent="hbox"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="drop_vbox" type="VBoxContainer" parent="hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="spacer" type="Control" parent="hbox/drop_vbox"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="options" type="OptionButton" parent="hbox/drop_vbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_p3j3b")

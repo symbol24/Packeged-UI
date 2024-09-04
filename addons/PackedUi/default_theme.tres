@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://cpqt1hqsijy37"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://cpqt1hqsijy37"]
 
 [ext_resource type="StyleBox" uid="uid://ddhl8p444eumu" path="res://addons/PackedUi/default_theme/disabled_style_box.tres" id="1_yf40b"]
 [ext_resource type="StyleBox" uid="uid://wkn6jgt60p1n" path="res://addons/PackedUi/default_theme/focused_style_box.tres" id="2_gi8m2"]
@@ -11,7 +11,13 @@
 [ext_resource type="StyleBox" uid="uid://cmct5m8vp1nan" path="res://addons/PackedUi/default_theme/slider.tres" id="7_8wxwi"]
 [ext_resource type="StyleBox" uid="uid://dvlhdmhhq1jym" path="res://addons/PackedUi/default_theme/tab_container_focus.tres" id="7_byxuu"]
 [ext_resource type="StyleBox" uid="uid://krt46pvq164d" path="res://addons/PackedUi/default_theme/tab_container_selected.tres" id="8_7u315"]
+[ext_resource type="StyleBox" uid="uid://coclsvspquv61" path="res://addons/PackedUi/default_theme/option_button_disabled.tres" id="8_rn5vg"]
 [ext_resource type="StyleBox" uid="uid://c616p27ee3ig5" path="res://addons/PackedUi/default_theme/tab_container_unselected.tres" id="9_bie8g"]
+[ext_resource type="StyleBox" uid="uid://blg7jpb0448ea" path="res://addons/PackedUi/default_theme/option_button_focus.tres" id="9_ckal3"]
+[ext_resource type="StyleBox" uid="uid://hby2reiwp4d7" path="res://addons/PackedUi/default_theme/option_button_normal.tres" id="10_esvwb"]
+[ext_resource type="StyleBox" uid="uid://bx42cpxgr4tu0" path="res://addons/PackedUi/default_theme/option_button_pressed.tres" id="11_qjvlu"]
+[ext_resource type="StyleBox" uid="uid://cvlf5nnyytkd4" path="res://addons/PackedUi/default_theme/option_popup_hover.tres" id="12_2uqnb"]
+[ext_resource type="StyleBox" uid="uid://dnf4ky0tcqc3j" path="res://addons/PackedUi/default_theme/option_popup_panel.tres" id="13_wy0g7"]
 
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -39,6 +45,18 @@ Label/constants/shadow_offset_y = 3
 Label/font_sizes/font_size = 16
 MenuTitle/base_type = &"RichTextLabel"
 MenuTitle/font_sizes/normal_font_size = 50
+OptionButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+OptionButton/colors/font_focus_color = Color(0.0830369, 0.120003, 0.177799, 1)
+OptionButton/colors/font_hover_color = Color(0.0830369, 0.120003, 0.177799, 1)
+OptionButton/colors/font_pressed_color = Color(0.0830369, 0.120003, 0.177799, 1)
+OptionButton/constants/arrow_margin = 10
+OptionButton/constants/modulate_arrow = 100
+OptionButton/font_sizes/font_size = 20
+OptionButton/styles/disabled = ExtResource("8_rn5vg")
+OptionButton/styles/focus = ExtResource("9_ckal3")
+OptionButton/styles/hover = ExtResource("9_ckal3")
+OptionButton/styles/normal = ExtResource("10_esvwb")
+OptionButton/styles/pressed = ExtResource("11_qjvlu")
 OptionLabel/base_type = &"Label"
 OptionLabel/colors/font_color = Color(0.813267, 0.85579, 0.921727, 1)
 OptionLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
@@ -51,6 +69,11 @@ OptionsSectionLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
 OptionsSectionLabel/constants/shadow_offset_x = 0
 OptionsSectionLabel/constants/shadow_offset_y = 0
 OptionsSectionLabel/font_sizes/font_size = 24
+PopupMenu/colors/font_color = Color(0.775679, 0.826406, 0.905065, 1)
+PopupMenu/colors/font_hover_color = Color(0.0830369, 0.120003, 0.177799, 1)
+PopupMenu/font_sizes/font_size = 20
+PopupMenu/styles/hover = ExtResource("12_2uqnb")
+PopupMenu/styles/panel = ExtResource("13_wy0g7")
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.560784)
