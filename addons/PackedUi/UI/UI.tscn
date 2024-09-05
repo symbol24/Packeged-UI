@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bd3dj73fu4rt6"]
+[gd_scene load_steps=13 format=3 uid="uid://bd3dj73fu4rt6"]
 
 [ext_resource type="Script" path="res://addons/PackedUi/Code/ui.gd" id="1_j1lf8"]
 [ext_resource type="Script" path="res://addons/PackedUi/Code/main_menu.gd" id="2_dhl62"]
@@ -10,11 +10,23 @@
 [ext_resource type="Resource" uid="uid://cj8cddje77ep4" path="res://addons/PackedUi/Credit Datas/demo_data.tres" id="7_5cen7"]
 [ext_resource type="Script" path="res://addons/PackedUi/Code/pause_menu.gd" id="7_r3cjq"]
 [ext_resource type="Script" path="res://addons/PackedUi/Code/result_screen.gd" id="8_p1pvi"]
+[ext_resource type="Script" path="res://addons/PackedUi/Code/wrappers/toggle_ui_button.gd" id="9_xcvtp"]
 [ext_resource type="Script" path="res://addons/PackedUi/Code/popups.gd" id="9_y8v47"]
 
 [node name="Ui" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_j1lf8")
 default_theme = ExtResource("3_ohvov")
+
+[node name="PlayerUI" type="Control" parent="." groups=["PlayerUI"]]
+visible = false
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+script = ExtResource("6_im37q")
+id = "player_ui"
 
 [node name="MainMenu" type="Control" parent="." node_paths=PackedStringArray("background") groups=["MainMenu"]]
 visible = false
@@ -52,7 +64,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("3_ohvov")
 bbcode_enabled = true
-text = "[center]MA GAME[/center]"
+text = "[center]Whatever you want[/center]"
 scroll_active = false
 
 [node name="buttons_hbox" type="HBoxContainer" parent="MainMenu/vbox1"]
@@ -81,7 +93,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="OptionsMenu" type="Control" parent="." node_paths=PackedStringArray("background")]
+[node name="OptionsMenu" type="Control" parent="." node_paths=PackedStringArray("background") groups=["OptionsMenu"]]
 visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
@@ -90,6 +102,7 @@ offset_right = 1280.0
 offset_bottom = 720.0
 script = ExtResource("4_wx7w4")
 menu_name = "Settings"
+use_simple_audio_manager = false
 background_color = Color(0.390689, 0.491481, 0.64164, 1)
 background = NodePath("options_background")
 id = "settings"
@@ -169,6 +182,7 @@ layout_mode = 2
 [node name="option_back_btn" type="Button" parent="OptionsMenu"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
 offset_left = 1032.0
 offset_top = 637.0
 offset_right = 1232.0
@@ -176,7 +190,7 @@ offset_bottom = 683.0
 theme = ExtResource("3_ohvov")
 text = "Back"
 
-[node name="Credits" type="Control" parent="." node_paths=PackedStringArray("background")]
+[node name="Credits" type="Control" parent="." node_paths=PackedStringArray("background") groups=["Credits"]]
 visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
@@ -186,13 +200,15 @@ offset_bottom = 720.0
 script = ExtResource("5_6nx8t")
 credit_sections = Array[ExtResource("6_86k27")]([ExtResource("7_5cen7")])
 background_color = Color(0.131654, 0.250022, 0.218582, 1)
-background = NodePath("credits_background")
+background = NodePath("background")
 id = "credits"
 
-[node name="credits_background" type="ColorRect" parent="Credits"]
+[node name="background" type="ColorRect" parent="Credits"]
+custom_minimum_size = Vector2(1280, 720)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+color = Color(0.133333, 0.25098, 0.219608, 1)
 
 [node name="credits_scroll" type="ScrollContainer" parent="Credits"]
 unique_name_in_owner = true
@@ -229,24 +245,14 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 0
-offset_left = 1141.0
-offset_top = 625.0
-offset_right = 1214.0
-offset_bottom = 671.0
+offset_left = 1002.0
+offset_top = 624.0
+offset_right = 1202.0
+offset_bottom = 670.0
 theme = ExtResource("3_ohvov")
 text = "Back"
 
-[node name="PlayerUI" type="Control" parent="."]
-visible = false
-custom_minimum_size = Vector2(1280, 720)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("6_im37q")
-id = "player_ui"
-
-[node name="PauseMenu" type="Control" parent="."]
+[node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("background") groups=["PauseMenu"]]
 visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
@@ -254,9 +260,64 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("7_r3cjq")
+page_title = "Paused"
+background_color = Color(0.054902, 0.054902, 0.054902, 0.858824)
+background = NodePath("background")
 id = "pause_menu"
 
-[node name="ResultScreen" type="Control" parent="."]
+[node name="background" type="ColorRect" parent="PauseMenu"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1, 0.998564)
+color = Color(0.0627451, 0.0627451, 0.0627451, 0.682353)
+
+[node name="vbox" type="VBoxContainer" parent="PauseMenu"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="spacer" type="Control" parent="PauseMenu/vbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="pause_page_title" type="RichTextLabel" parent="PauseMenu/vbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = ExtResource("3_ohvov")
+theme_type_variation = &"MenuTitle"
+bbcode_enabled = true
+text = "[center]title goes here[/center]"
+
+[node name="pause_back_btn" type="Button" parent="PauseMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 1002.0
+offset_top = 624.0
+offset_right = 1202.0
+offset_bottom = 670.0
+theme = ExtResource("3_ohvov")
+text = "Return"
+
+[node name="settings_btn" type="Button" parent="PauseMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 1002.0
+offset_top = 624.0
+offset_right = 1202.0
+offset_bottom = 670.0
+theme = ExtResource("3_ohvov")
+text = "Settings"
+script = ExtResource("9_xcvtp")
+target_ui_id = "settings"
+
+[node name="ResultScreen" type="Control" parent="." groups=["ResultScreen"]]
 visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
@@ -267,11 +328,9 @@ script = ExtResource("8_p1pvi")
 id = "result_screen"
 
 [node name="Popups" type="Control" parent="."]
-visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_y8v47")
-id = "popups"

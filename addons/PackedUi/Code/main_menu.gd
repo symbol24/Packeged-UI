@@ -14,7 +14,7 @@ signal ButtonPressed(id:String)
 @onready var hbox_seperator_02: Control = %hbox_seperator_02
 @onready var buttons_hbox: HBoxContainer = %buttons_hbox
 
-var button_list:Array[SButton] = []
+var button_list:Array[MainMenuButton] = []
 
 func _ready() -> void:
 	super()
@@ -31,16 +31,16 @@ func _set_game_title(_value:String = "") -> void:
 	game_title_label.text = "[center]"+_value+"[/center]"
 	UI.game_name = _value
 
-func _make_buttons(_list:Array[String]) -> Array[SButton]:
-	var buttons:Array[SButton] = []
-	var previous:SButton
+func _make_buttons(_list:Array[String]) -> Array[MainMenuButton]:
+	var buttons:Array[MainMenuButton] = []
+	var previous:MainMenuButton
 	if _list.is_empty():
 		push_error("Main menu options list is empty.")
 		return buttons
 		
 	var x:int = 0
 	for each in _list:
-		var new_button = SButton.new()
+		var new_button = MainMenuButton.new()
 		buttons.append(new_button)
 		menu_button_vbox.add_child.call_deferred(new_button)
 		await new_button.ready
@@ -61,15 +61,18 @@ func _make_buttons(_list:Array[String]) -> Array[SButton]:
 		x += 1
 	return buttons
 
-func _toggle_control(_id:String, _value:bool) -> void:
+func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 	if id == "":
 		push_error(name, " does not have an id set.")
 	else:
+		UI.previous_menu = _previous
 		if _id == id:
 			set_deferred("visible", _value)
 			if _value:
 				if not button_list.is_empty():
 					button_list[0].grab_focus()
+		else:
+			set_deferred("visible", not _value)
 
 func button_pressed(_id:String) -> void:
 	var signal_sent:bool = false
@@ -84,13 +87,13 @@ func button_pressed(_id:String) -> void:
 			ButtonPressed.emit(_id.to_lower())
 			signal_sent = true
 		"options":
-			UI.ToggleUi.emit(_id.to_lower(), true)
+			UI.ToggleUi.emit(_id.to_lower(), true, id)
 			signal_sent = true
 		"settings":
-			UI.ToggleUi.emit(_id.to_lower(), true)
+			UI.ToggleUi.emit(_id.to_lower(), true, id)
 			signal_sent = true
 		"credits":
-			UI.ToggleUi.emit(_id.to_lower(), true)
+			UI.ToggleUi.emit(_id.to_lower(), true, id)
 			signal_sent = true
 		"quit":
 			ButtonPressed.emit(_id.to_lower())
@@ -98,5 +101,5 @@ func button_pressed(_id:String) -> void:
 		_:
 			push_warning("Button name unrecognized. Suggest using 'Play', 'Start', 'Continue', 'Options', 'Settings', 'Credits', or 'Quit'")
 
-	if signal_sent:
-		_toggle_control(id, false)
+	#if signal_sent:
+		#_toggle_control(id, false)

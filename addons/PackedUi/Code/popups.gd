@@ -1,1 +1,1 @@
-class_name Popups extends SControl
+class_name Popups extends Control

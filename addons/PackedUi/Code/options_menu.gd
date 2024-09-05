@@ -16,6 +16,8 @@ const DROP_DOWN_OPTION = preload("res://addons/PackedUi/UI/drop_down_option.tscn
 @export var menu_name:String
 ## If TRUE, a confirmation POPUP is displayed when exiting the options menu to confirm setting changes. If POPUP is confirmed, a signal OptionsUpdated with all savable options. If the POPUP is not confirmed, options are returned to default.
 @export var confirm_on_exit:bool = false
+## If TRUE, sets the position of the back button through code.
+@export var set_position_of_buttons:bool = true
 
 @export_group("Audio Settings")
 ## Name displayed in the section label.
@@ -88,11 +90,13 @@ func _ready() -> void:
 	UI.OptionUpdated.connect(_update_window_size_option)
 	UI.OptionUpdated.connect(_update_window_option)
 	UI.OptionUpdated.connect(_update_game_language)
-	option_back_btn.pressed.connect(_back_pressed)
-	option_back_btn.position = (Vector2(UI.width, UI.height)*0.95) - option_back_btn.size
 	tab_container.get_tab_bar().set_tab_title(0,"Basic")
 	starting_window_option = _get_window_option()
 	starting_window_size = DisplayServer.window_get_size()
+	option_back_btn.pressed.connect(_back_pressed)
+	
+	if set_position_of_buttons:
+		option_back_btn.position = (Vector2(UI.width, UI.height)*0.95) - option_back_btn.size
 	
 	if menu_name:
 		options_page_title.text = "[center]"+menu_name+"[/center]"
@@ -105,24 +109,26 @@ func _ready() -> void:
 	
 	if display_language_options:
 		loaded_locales = TranslationServer.get_loaded_locales()
-		print(loaded_locales)
 		language_options = _build_language_options(language_section_name, loaded_locales)
 	
 	if tab_container.get_tab_count() <= 1:
 		tab_container.tabs_visible = false
 
 func _back_pressed() -> void:
-	_toggle_control(id, false)
-	UI.ToggleUi.emit("main_menu", true)
+	#print(previous_menu)
+	UI.ToggleUi.emit(UI.previous_menu, true, id)
 
-func _toggle_control(_id:String, _value:bool) -> void:
+func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 	if id == "":
 		push_error(name, " does not have an id set.")
 	else:
+		UI.previous_menu = _previous
 		if _id == id:
 			set_deferred("visible", _value)
 			if _value:
 				option_back_btn.grab_focus()
+		else:
+			set_deferred("visible", not _value)
 
 func _build_sound_options(_name:String, _buses:Array[String]) -> void:
 	var title = _add_section_title(_name)
@@ -182,7 +188,6 @@ func _get_window_option() -> WindowOption:
 # TODO: Uppdate to use popups to confirm selection
 func _update_window_option(_id:String, _value:WindowOption) -> void:
 	if _id == "display_options":
-		print("window size value: ", _value)
 		match _value as WindowOption:
 			WindowOption.FULLSCREEN:
 				_update_window_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -232,5 +237,4 @@ func _get_starting_language_id() -> int:
 	if TranslationServer.get_locale() not in loaded_locales:
 		if locale.length() > 2:
 			locale = locale.split("_")[0]
-	print(locale)
 	return loaded_locales.find(locale)

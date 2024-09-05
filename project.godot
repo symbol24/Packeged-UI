@@ -19,6 +19,15 @@ config/icon="res://icon.svg"
 
 UI="*res://addons/PackedUi/UI/UI.tscn"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/inferred_declaration=1
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/unsafe_cast=1
+gdscript/warnings/unsafe_call_argument=1
+
 [display]
 
 window/size/viewport_width=1280
@@ -32,6 +41,11 @@ enabled=PackedStringArray("res://addons/PackedUi/plugin.cfg")
 [global_group]
 
 MainMenu=""
+PlayerUI=""
+OptionsMenu=""
+Credits=""
+PauseMenu=""
+ResultScreen=""
 
 [internationalization]
 

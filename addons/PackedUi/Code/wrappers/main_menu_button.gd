@@ -1,4 +1,4 @@
-class_name SButton extends Button
+class_name MainMenuButton extends Button
 
 var id:String = ""
 var main_menu:MainMenu

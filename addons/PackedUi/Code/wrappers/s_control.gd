@@ -10,10 +10,13 @@ func _ready() -> void:
 	size.y = UI.height
 	UI.ToggleUi.connect(_toggle_control)
 	
-func _toggle_control(_id:String, _value:bool) -> void:
+func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 	if id == "":
 		push_error(name, " does not have an id set.")
 	else:
+		UI.previous_menu = _previous
 		if _id == id:
 			set_deferred("visible", _value)
+		else:
+			set_deferred("visible", not _value)
 	
