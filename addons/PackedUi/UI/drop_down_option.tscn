@@ -16,6 +16,7 @@ script = ExtResource("1_np7u5")
 
 [node name="hbox" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(720, 50)
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 0

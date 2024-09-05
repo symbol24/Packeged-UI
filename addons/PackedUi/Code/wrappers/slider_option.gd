@@ -34,7 +34,7 @@ func _drag_ended(_value_changed:bool) -> void:
 func _start_dragging(): 
 	dragging = true
 
-func set_slider(_name:String, _using_sam:bool, _slider_value:float = 1.0) -> void:
+func set_slider(_name:String, _using_sam:bool, _slider_value:float = 1.0) -> float:
 	name = "bus_slider_"+_name
 	id = _name
 	name_label.text = _name
@@ -54,3 +54,9 @@ func set_slider(_name:String, _using_sam:bool, _slider_value:float = 1.0) -> voi
 			push_error("Simple Audio Manager not found. Default audio values not set. Make sure to have latest version of Simple Audio Manager installed.")
 	else:
 		slider.value = _slider_value
+
+	return slider.value
+
+func set_slider_value(_id:String, _value:float) -> void:
+	if _id == id:
+		slider.value = clampf(_value, 0.0, 1.0)

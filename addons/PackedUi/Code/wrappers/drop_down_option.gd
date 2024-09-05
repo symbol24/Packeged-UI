@@ -35,5 +35,5 @@ func set_options_with_ids(_id:String, _label_text:String, _options:Array[String]
 		options.add_item(option, i)
 		i += 1
 
-func select_starting_value(_value:int) -> void:
+func select_value(_value:int) -> void:
 	options.select(_value)

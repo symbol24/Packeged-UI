@@ -14,6 +14,8 @@ const DROP_DOWN_OPTION = preload("res://addons/PackedUi/UI/drop_down_option.tscn
 
 ## Name displayed at the top of the menu on runtime.
 @export var menu_name:String
+## Name displayed in the tab selector when more than 1 tab is present in the tab container._add_constant_central_force
+@export var first_tab_name:String = "Basic"
 ## If TRUE, a confirmation POPUP is displayed when exiting the options menu to confirm setting changes. If POPUP is confirmed, a signal OptionsUpdated with all savable options. If the POPUP is not confirmed, options are returned to default.
 @export var confirm_on_exit:bool = false
 ## If TRUE, sets the position of the back button through code.
@@ -72,27 +74,55 @@ const DROP_DOWN_OPTION = preload("res://addons/PackedUi/UI/drop_down_option.tscn
 @onready var tab_container: TabContainer = %TabContainer
 @onready var basics_vbox: VBoxContainer = %basics_vbox
 
+# Audio levels
+var starting_audio_levels:Dictionary = {}
+var current_audio_levels:Dictionary = {}
+var new_audio_levels:Dictionary = {}
+
+# Window Mode
 var starting_window_option:WindowOption
 var current_window_option:WindowOption
+var new_window_option:WindowOption
+
+# Window Size
 var starting_window_size:Vector2i
 var current_window_size:Vector2i
+var new_window_size:Vector2i
+
+# Menu options
 var window_options_drop_down:DropDownOption
 var size_options_drop_down:DropDownOption
 var language_options:DropDownOption
-var loaded_locales:PackedStringArray
+var audio_options:Dictionary = {}
 
+# Language
+var loaded_locales:PackedStringArray
+var starting_language:int
+var current_language:int
+var new_language:int
+
+# If changes are made other than resizing, a popup is displayed on exit to confirm changes.
 var changes_made:bool = false
 
-# TODO: Uppdate to use popups to confirm selection on exit
+# Loacalition string ids
+var resize_title:String = tr("resize_title")
+var resize_text:String = tr("resize_text")
+var changes_title:String = tr("changes_title")
+var changes_text:String = tr("changes_text")
+
 
 func _ready() -> void:
 	super()
 	UI.OptionUpdated.connect(_update_window_size_option)
 	UI.OptionUpdated.connect(_update_window_option)
 	UI.OptionUpdated.connect(_update_game_language)
-	tab_container.get_tab_bar().set_tab_title(0,"Basic")
+	UI.OptionUpdated.connect(_update_audio_levels)
+	UI.PopupResult.connect(_popup_result)
+	tab_container.get_tab_bar().set_tab_title(0,first_tab_name)
 	starting_window_option = _get_window_option()
+	current_window_option = starting_window_option
 	starting_window_size = DisplayServer.window_get_size()
+	current_window_size = starting_window_size
 	option_back_btn.pressed.connect(_back_pressed)
 	
 	if set_position_of_buttons:
@@ -114,9 +144,16 @@ func _ready() -> void:
 	if tab_container.get_tab_count() <= 1:
 		tab_container.tabs_visible = false
 
+
+# If changes in the options other than window resize have been made, a popup appears to confirm changes.
 func _back_pressed() -> void:
-	#print(previous_menu)
-	UI.ToggleUi.emit(UI.previous_menu, true, id)
+	if changes_made and confirm_on_exit:
+		UI.PopupLarge.emit(Popups.Severity.WARNING, changes_title, changes_text, "changes_made")
+	elif changes_made and not confirm_on_exit:
+		_popup_result("changes_made", true)
+	else:
+		UI.ToggleUi.emit(UI.previous_menu, true, id)
+
 
 func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 	if id == "":
@@ -130,13 +167,18 @@ func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 		else:
 			set_deferred("visible", not _value)
 
+
 func _build_sound_options(_name:String, _buses:Array[String]) -> void:
 	var title = _add_section_title(_name)
 	basics_vbox.add_child(title)
 	for each in _buses:
 		var slider = SLIDER_OPTION.instantiate() as SliderOption
 		basics_vbox.add_child(slider)
-		slider.set_slider(each, use_simple_audio_manager, default_audio_slider_value)
+		current_audio_levels[each] = slider.set_slider(each, use_simple_audio_manager, default_audio_slider_value)
+		audio_options[each] = slider
+	new_audio_levels = current_audio_levels.duplicate()
+	starting_audio_levels = current_audio_levels.duplicate()
+
 
 func _build_display_options(_name:String, _window:Array[String], _sizes:Array[Vector2i]) -> void:
 	var title = _add_section_title(_name)
@@ -145,7 +187,7 @@ func _build_display_options(_name:String, _window:Array[String], _sizes:Array[Ve
 	basics_vbox.name = "display_options"
 	basics_vbox.add_child(window_options_drop_down)
 	window_options_drop_down.set_options("display_options", _name, _window)
-	window_options_drop_down.select_starting_value(starting_window_option)
+	window_options_drop_down.select_value(starting_window_option)
 	var sizes_string:Array[String] = []
 	for vector in _sizes:
 		var new_string:String = str(vector.x) + " x " + str(vector.y)
@@ -154,7 +196,7 @@ func _build_display_options(_name:String, _window:Array[String], _sizes:Array[Ve
 	size_options_drop_down.name = "window_size_options"
 	basics_vbox.add_child(size_options_drop_down)
 	size_options_drop_down.set_options("window_size_options", "Window Size", sizes_string, window_sizes)
-	size_options_drop_down.select_starting_value(window_sizes.find(starting_window_size))
+	size_options_drop_down.select_value(window_sizes.find(starting_window_size))
 
 
 func _add_section_title(_text:String) -> Label:
@@ -166,6 +208,7 @@ func _add_section_title(_text:String) -> Label:
 	title.theme = UI.default_theme
 	title.theme_type_variation = "OptionsSectionLabel"
 	return title
+
 
 func _get_window_option() -> WindowOption:
 	var option:WindowOption
@@ -185,8 +228,15 @@ func _get_window_option() -> WindowOption:
 	
 	return option
 
-# TODO: Uppdate to use popups to confirm selection
-func _update_window_option(_id:String, _value:WindowOption) -> void:
+
+func _update_audio_levels(_id:String, _value:float, is_user_change:bool = true) -> void:
+	if new_audio_levels.has(_id):
+		new_audio_levels[_id] = _value
+	
+		if is_user_change:
+			changes_made = true
+
+func _update_window_option(_id:String, _value:WindowOption, is_user_change:bool = true) -> void:
 	if _id == "display_options":
 		match _value as WindowOption:
 			WindowOption.FULLSCREEN:
@@ -199,20 +249,27 @@ func _update_window_option(_id:String, _value:WindowOption) -> void:
 			WindowOption.WINDOWED:
 				_update_window_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 				_update_window_borderless(false)
-		current_window_option = _value
+		new_window_option = _value
 
-func _update_window_size_option(_id:String, _value:int) -> void:
+		if is_user_change:
+			changes_made = true
+
+
+func _update_window_size_option(_id:String, _value:int, _popup:bool = true) -> void:
 	if _id == "window_size_options" and _value:
 		DisplayServer.window_set_size(window_sizes[_value])
-		current_window_size = window_sizes[_value]
+		new_window_size = window_sizes[_value]
+		if _popup:
+			UI.PopupLarge.emit(Popups.Severity.NORMAL, resize_title, resize_text, "window_size", null, 10)
+
 
 func _update_window_mode(_mode := DisplayServer.WINDOW_MODE_FULLSCREEN):
-	#Debug.log("Attempting to set window mode as ", _value)
 	DisplayServer.window_set_mode(_mode)
 
+
 func _update_window_borderless(_value := false):
-	#Debug.log("Attempting to set bordeless to ", _value)
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, _value)
+
 
 func _build_language_options(_name:String, _languages:PackedStringArray) -> DropDownOption:
 	if _languages.is_empty():
@@ -224,13 +281,20 @@ func _build_language_options(_name:String, _languages:PackedStringArray) -> Drop
 	basics_vbox.add_child(title)
 	var dropdown:DropDownOption = DROP_DOWN_OPTION.instantiate() as DropDownOption
 	basics_vbox.add_child(dropdown)
-	dropdown.set_options("language_option", _name, _languages,)
-	dropdown.select_starting_value(_get_starting_language_id())
+	dropdown.set_options("language_option", _name, _languages)
+	starting_language = _get_starting_language_id()
+	current_language = starting_language
+	new_language = starting_language
+	dropdown.select_value(starting_language)
 	return dropdown
+
 
 func _update_game_language(_id:String, _value:int) -> void:
 	if _id == "language_option":
 		TranslationServer.set_locale(loaded_locales[_value])
+		new_language = _value
+		changes_made = true
+
 
 func _get_starting_language_id() -> int:
 	var locale:String = TranslationServer.get_locale() 
@@ -238,3 +302,39 @@ func _get_starting_language_id() -> int:
 		if locale.length() > 2:
 			locale = locale.split("_")[0]
 	return loaded_locales.find(locale)
+
+
+func _popup_result(_id:String, _result:bool) -> void:
+	if _id == "window_size":
+		match _result:
+			true:
+				current_window_size = new_window_size
+			_:
+				DisplayServer.window_set_size(current_window_size)
+				size_options_drop_down.select_value(window_sizes.find(current_window_size))
+	elif _id == "changes_made":
+		match _result:
+			true:
+				if display_language_options:
+					current_language = new_language
+				if display_display_options:
+					current_window_option = new_window_option
+				if display_audio_options:
+					current_audio_levels = new_audio_levels.duplicate()
+				
+				changes_made = false
+				UI.ToggleUi.emit(UI.previous_menu, true, id)
+
+			_:
+				if display_language_options:
+					TranslationServer.set_locale(loaded_locales[current_language])
+					language_options.select_value(current_language)
+				if display_display_options:
+					_update_window_option("display_options", current_window_option, false)
+					window_options_drop_down.select_value(current_window_option)
+				if display_audio_options:
+					for key:String in current_audio_levels.keys():
+						_update_audio_levels(key, current_audio_levels[key], false)
+						audio_options[key].set_slider_value(key, current_audio_levels[key])
+				
+				changes_made = false

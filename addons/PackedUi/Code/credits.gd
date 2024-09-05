@@ -4,6 +4,8 @@ const CREDITS_SECTION = preload("res://addons/PackedUi/UI/credits_section.tscn")
 
 ## Array of sections to be displayed in the credits.
 @export var credit_sections:Array[CreditSectionData]
+## If TRUE, credits will auto-scroll once the scroll_delay is finished.
+@export var auto_scroll:bool = true
 ## Delay before the auto-scrolling of the credits begin.
 @export var scroll_delay:float = 2
 ## Speed at which the credits auto-scroll.
@@ -26,6 +28,7 @@ var scroll_timer:float = 0.0:
 var scroll_wait:bool = false
 var scrolling:bool = false
 
+
 func _ready() -> void:
 	super()
 	credits_scroll.scroll_ended.connect(_scroll_ended)
@@ -38,11 +41,14 @@ func _ready() -> void:
 	if set_position_of_buttons:
 		back_btn.position = (Vector2(UI.width, UI.height) * 0.95) - back_btn.size
 
-func _physics_process(delta: float) -> void:
+
+func _process(delta: float) -> void:
 	if scroll_wait:
 		scroll_timer += delta
+
 	if scrolling:
 		credits_scroll.scroll_vertical += scroll_speed * delta
+
 
 func _create_credits(_list:Array[CreditSectionData]) -> void:
 	for section in _list:
@@ -51,8 +57,10 @@ func _create_credits(_list:Array[CreditSectionData]) -> void:
 		await new_section.ready
 		new_section.set_section(section)
 
+
 func _back_btn_pressed() -> void:
 	UI.ToggleUi.emit("main_menu", true, id)
+
 
 func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 	if id == "":
@@ -67,9 +75,11 @@ func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 				credits_scroll.scroll_vertical = 0
 			else:
 				back_btn.grab_focus()
-				scroll_wait = true
+				if auto_scroll:
+					scroll_wait = true
 		else:
 			set_deferred("visible", not _value)
+
 
 func _scroll_ended() -> void:
 	scrolling = false

@@ -1,11 +1,13 @@
 extends CanvasLayer
 
 signal ToggleUi(id:String, value:bool, previous:String)
+signal ReturnToMainMenu()
 signal WindowResized(_value:Vector2i)
 signal OptionUpdated(id:String, value)
 signal TogglePauseGame(value:bool)
-signal PopupSmall(text:String)
-signal PopupBig(severity, title:String, text:String, popup_id:String)
+signal PopupSmall(text:String, icon:Texture2D)
+signal PopupLarge(severity, title:String, text:String, popup_id:String, icon:CompressedTexture2D, timer:float)
+signal PopupResult(id:String, result:bool)
 
 ## Setting your own theme here will make the menu more personalized. Please note that a lot of Type Variations are being used. Have a look at the default_theme.tres in the Packed Ui addon folder. A lot of Style Boxes are used and can be found in the StyleBoxes folder.
 @export var default_theme:Theme
@@ -23,11 +25,7 @@ var size_timer:float = 0.0:
 			window_size = _get_window_size(window_size)
 var size_delay:float = 0.5
 var game_name:String
-var previous_menu:String:
-	set(_value):
-		if previous_menu != _value:
-			previous_menu = _value
-			print("setting ", previous_menu)
+var previous_menu:String
 
 func _ready() -> void:
 	window_size = _get_window_size(window_size)

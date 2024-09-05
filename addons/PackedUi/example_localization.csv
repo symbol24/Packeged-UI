@@ -3,3 +3,7 @@ en,English,Anglais,Engrish
 fr,French,Francais,Peteux
 fr_CA,Frog,Fou,Quebecois
 Master,Master,Maitre,LA totale
+resize_title,Window Resized,Fenetre Redimensioner,Ca change
+resize_text,The window has been resized. Do you wish to continue with this change?,La fenetre a ete redimensioner. Voulez-vous contier avec ce changement?,Stu correk?
+mode_title,Window Mode Changed,Mode de la fenetre changer,bon kesser ta changer encore?
+mode_text,The window mode has been changed.,Le mode de la fenetre a ete changer. ,"Bon, la window a change de mode, t content  la."

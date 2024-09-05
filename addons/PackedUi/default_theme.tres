@@ -1,48 +1,60 @@
-[gd_resource type="Theme" load_steps=19 format=3 uid="uid://cpqt1hqsijy37"]
+[gd_resource type="Theme" load_steps=21 format=3 uid="uid://cpqt1hqsijy37"]
 
-[ext_resource type="StyleBox" uid="uid://ddhl8p444eumu" path="res://addons/PackedUi/StyleBoxes/disabled_style_box.tres" id="1_yf40b"]
-[ext_resource type="StyleBox" uid="uid://wkn6jgt60p1n" path="res://addons/PackedUi/StyleBoxes/focused_style_box.tres" id="2_gi8m2"]
-[ext_resource type="StyleBox" uid="uid://csmhkh3s34lxl" path="res://addons/PackedUi/StyleBoxes/normal_style_box.tres" id="3_h17uv"]
-[ext_resource type="StyleBox" uid="uid://c71wvuofjw7rl" path="res://addons/PackedUi/StyleBoxes/pressed_style_box.tres" id="4_p1mff"]
-[ext_resource type="StyleBox" uid="uid://b6rgkfwsgrkal" path="res://addons/PackedUi/StyleBoxes/slider_grabber_area.tres" id="5_ri824"]
-[ext_resource type="StyleBox" uid="uid://cuxeeylavn8nv" path="res://addons/PackedUi/StyleBoxes/tab_container_panel.tres" id="5_y0tlf"]
-[ext_resource type="StyleBox" uid="uid://b3ga7m5ktyrgx" path="res://addons/PackedUi/StyleBoxes/tab_container_disabled.tres" id="6_elwxs"]
-[ext_resource type="StyleBox" uid="uid://eukpcrf5j47r" path="res://addons/PackedUi/StyleBoxes/slider_grabber_area_highlight.tres" id="6_wecrc"]
-[ext_resource type="StyleBox" uid="uid://cmct5m8vp1nan" path="res://addons/PackedUi/StyleBoxes/slider.tres" id="7_8wxwi"]
-[ext_resource type="StyleBox" uid="uid://dvlhdmhhq1jym" path="res://addons/PackedUi/StyleBoxes/tab_container_focus.tres" id="7_byxuu"]
-[ext_resource type="StyleBox" uid="uid://krt46pvq164d" path="res://addons/PackedUi/StyleBoxes/tab_container_selected.tres" id="8_7u315"]
-[ext_resource type="StyleBox" uid="uid://coclsvspquv61" path="res://addons/PackedUi/StyleBoxes/option_button_disabled.tres" id="8_rn5vg"]
-[ext_resource type="StyleBox" uid="uid://c616p27ee3ig5" path="res://addons/PackedUi/StyleBoxes/tab_container_unselected.tres" id="9_bie8g"]
-[ext_resource type="StyleBox" uid="uid://blg7jpb0448ea" path="res://addons/PackedUi/StyleBoxes/option_button_focus.tres" id="9_ckal3"]
-[ext_resource type="StyleBox" uid="uid://hby2reiwp4d7" path="res://addons/PackedUi/StyleBoxes/option_button_normal.tres" id="10_esvwb"]
-[ext_resource type="StyleBox" uid="uid://bx42cpxgr4tu0" path="res://addons/PackedUi/StyleBoxes/option_button_pressed.tres" id="11_qjvlu"]
-[ext_resource type="StyleBox" uid="uid://cvlf5nnyytkd4" path="res://addons/PackedUi/StyleBoxes/option_popup_hover.tres" id="12_2uqnb"]
-[ext_resource type="StyleBox" uid="uid://dnf4ky0tcqc3j" path="res://addons/PackedUi/StyleBoxes/option_popup_panel.tres" id="13_wy0g7"]
+[ext_resource type="StyleBox" uid="uid://ddhl8p444eumu" path="res://addons/PackedUi/StyleBoxes/disabled_style_box.tres" id="1_lheve"]
+[ext_resource type="StyleBox" uid="uid://wkn6jgt60p1n" path="res://addons/PackedUi/StyleBoxes/focused_style_box.tres" id="2_wu1wa"]
+[ext_resource type="StyleBox" uid="uid://csmhkh3s34lxl" path="res://addons/PackedUi/StyleBoxes/normal_style_box.tres" id="3_62vlk"]
+[ext_resource type="StyleBox" uid="uid://c71wvuofjw7rl" path="res://addons/PackedUi/StyleBoxes/pressed_style_box.tres" id="4_1kqla"]
+[ext_resource type="StyleBox" uid="uid://b6rgkfwsgrkal" path="res://addons/PackedUi/StyleBoxes/slider_grabber_area.tres" id="5_dffqe"]
+[ext_resource type="StyleBox" uid="uid://eukpcrf5j47r" path="res://addons/PackedUi/StyleBoxes/slider_grabber_area_highlight.tres" id="6_chk0c"]
+[ext_resource type="StyleBox" uid="uid://cmct5m8vp1nan" path="res://addons/PackedUi/StyleBoxes/slider.tres" id="7_51nya"]
+[ext_resource type="StyleBox" uid="uid://cdyddh85ohgpj" path="res://addons/PackedUi/StyleBoxes/large_popup_panel.tres" id="8_jv3ho"]
+[ext_resource type="StyleBox" uid="uid://coclsvspquv61" path="res://addons/PackedUi/StyleBoxes/option_button_disabled.tres" id="8_nkwck"]
+[ext_resource type="StyleBox" uid="uid://blg7jpb0448ea" path="res://addons/PackedUi/StyleBoxes/option_button_focus.tres" id="9_30ij5"]
+[ext_resource type="StyleBox" uid="uid://hby2reiwp4d7" path="res://addons/PackedUi/StyleBoxes/option_button_normal.tres" id="10_n1vxq"]
+[ext_resource type="StyleBox" uid="uid://bx42cpxgr4tu0" path="res://addons/PackedUi/StyleBoxes/option_button_pressed.tres" id="11_ghemo"]
+[ext_resource type="StyleBox" uid="uid://cvlf5nnyytkd4" path="res://addons/PackedUi/StyleBoxes/option_popup_hover.tres" id="12_nt6df"]
+[ext_resource type="StyleBox" uid="uid://dnf4ky0tcqc3j" path="res://addons/PackedUi/StyleBoxes/option_popup_panel.tres" id="13_yb1g0"]
+[ext_resource type="StyleBox" uid="uid://do8eqhr4sapva" path="res://addons/PackedUi/StyleBoxes/small_popup_panel.tres" id="14_0uj5c"]
+[ext_resource type="StyleBox" uid="uid://cuxeeylavn8nv" path="res://addons/PackedUi/StyleBoxes/tab_container_panel.tres" id="14_k2t5o"]
+[ext_resource type="StyleBox" uid="uid://b3ga7m5ktyrgx" path="res://addons/PackedUi/StyleBoxes/tab_container_disabled.tres" id="15_exfkq"]
+[ext_resource type="StyleBox" uid="uid://dvlhdmhhq1jym" path="res://addons/PackedUi/StyleBoxes/tab_container_focus.tres" id="16_xciap"]
+[ext_resource type="StyleBox" uid="uid://krt46pvq164d" path="res://addons/PackedUi/StyleBoxes/tab_container_selected.tres" id="17_g8nl2"]
+[ext_resource type="StyleBox" uid="uid://c616p27ee3ig5" path="res://addons/PackedUi/StyleBoxes/tab_container_unselected.tres" id="18_hok7y"]
 
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 Button/colors/font_focus_color = Color(0.0887065, 0.0745306, 0.0988123, 1)
 Button/colors/font_hover_color = Color(0.0887065, 0.0745306, 0.0988123, 1)
 Button/font_sizes/font_size = 30
-Button/styles/disabled = ExtResource("1_yf40b")
-Button/styles/focus = ExtResource("2_gi8m2")
-Button/styles/hover = ExtResource("2_gi8m2")
-Button/styles/normal = ExtResource("3_h17uv")
-Button/styles/pressed = ExtResource("4_p1mff")
+Button/styles/disabled = ExtResource("1_lheve")
+Button/styles/focus = ExtResource("2_wu1wa")
+Button/styles/hover = ExtResource("2_wu1wa")
+Button/styles/normal = ExtResource("3_62vlk")
+Button/styles/pressed = ExtResource("4_1kqla")
 CreditsLabel/base_type = &"Label"
 CreditsLabel/colors/font_color = Color(0.724643, 0.724643, 0.724643, 1)
 CreditsLabel/font_sizes/font_size = 20
 CreditsRichText/base_type = &"RichTextLabel"
 CreditsRichText/colors/default_color = Color(0.860369, 0.860369, 0.860369, 1)
 CreditsRichText/font_sizes/normal_font_size = 30
-HSlider/styles/grabber_area = ExtResource("5_ri824")
-HSlider/styles/grabber_area_highlight = ExtResource("6_wecrc")
-HSlider/styles/slider = ExtResource("7_8wxwi")
+HSlider/styles/grabber_area = ExtResource("5_dffqe")
+HSlider/styles/grabber_area_highlight = ExtResource("6_chk0c")
+HSlider/styles/slider = ExtResource("7_51nya")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0.619608)
 Label/constants/shadow_offset_x = 3
 Label/constants/shadow_offset_y = 3
 Label/font_sizes/font_size = 16
+LargePopupButton/base_type = &"Button"
+LargePopupButton/font_sizes/font_size = 16
+LargePopupPanel/base_type = &"PanelContainer"
+LargePopupPanel/styles/panel = ExtResource("8_jv3ho")
+LargePopupText/base_type = &"RichTextLabel"
+LargePopupText/font_sizes/normal_font_size = 16
+LargePopupTimerLabel/base_type = &"Label"
+LargePopupTimerLabel/font_sizes/font_size = 28
+LargePopupTitle/base_type = &"RichTextLabel"
+LargePopupTitle/font_sizes/normal_font_size = 24
 MenuTitle/base_type = &"RichTextLabel"
 MenuTitle/font_sizes/normal_font_size = 50
 OptionButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -52,11 +64,11 @@ OptionButton/colors/font_pressed_color = Color(0.0830369, 0.120003, 0.177799, 1)
 OptionButton/constants/arrow_margin = 10
 OptionButton/constants/modulate_arrow = 100
 OptionButton/font_sizes/font_size = 20
-OptionButton/styles/disabled = ExtResource("8_rn5vg")
-OptionButton/styles/focus = ExtResource("9_ckal3")
-OptionButton/styles/hover = ExtResource("9_ckal3")
-OptionButton/styles/normal = ExtResource("10_esvwb")
-OptionButton/styles/pressed = ExtResource("11_qjvlu")
+OptionButton/styles/disabled = ExtResource("8_nkwck")
+OptionButton/styles/focus = ExtResource("9_30ij5")
+OptionButton/styles/hover = ExtResource("9_30ij5")
+OptionButton/styles/normal = ExtResource("10_n1vxq")
+OptionButton/styles/pressed = ExtResource("11_ghemo")
 OptionLabel/base_type = &"Label"
 OptionLabel/colors/font_color = Color(0.813267, 0.85579, 0.921727, 1)
 OptionLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
@@ -72,22 +84,30 @@ OptionsSectionLabel/font_sizes/font_size = 24
 PopupMenu/colors/font_color = Color(0.775679, 0.826406, 0.905065, 1)
 PopupMenu/colors/font_hover_color = Color(0.0830369, 0.120003, 0.177799, 1)
 PopupMenu/font_sizes/font_size = 20
-PopupMenu/styles/hover = ExtResource("12_2uqnb")
-PopupMenu/styles/panel = ExtResource("13_wy0g7")
+PopupMenu/styles/hover = ExtResource("12_nt6df")
+PopupMenu/styles/panel = ExtResource("13_yb1g0")
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.560784)
 RichTextLabel/constants/shadow_offset_x = 2
 RichTextLabel/constants/shadow_offset_y = 2
 RichTextLabel/font_sizes/normal_font_size = 72
+SmallPopupPanel/base_type = &"PanelContainer"
+SmallPopupPanel/styles/panel = ExtResource("14_0uj5c")
+SmallPopupRLabel/base_type = &"RichTextLabel"
+SmallPopupRLabel/colors/default_color = Color(0, 0, 0, 1)
+SmallPopupRLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
+SmallPopupRLabel/constants/shadow_offset_x = 0
+SmallPopupRLabel/constants/shadow_offset_y = 0
+SmallPopupRLabel/font_sizes/normal_font_size = 24
 TabContainer/colors/font_disabled_color = Color(0, 0, 0, 0.286275)
 TabContainer/colors/font_hovered_color = Color(0.372549, 0.470588, 0.623529, 1)
 TabContainer/colors/font_selected_color = Color(0.95, 0.95, 0.95, 1)
 TabContainer/colors/font_unselected_color = Color(0.345606, 0.422101, 0.527, 1)
 TabContainer/font_sizes/font_size = 20
-TabContainer/styles/panel = ExtResource("5_y0tlf")
-TabContainer/styles/tab_disabled = ExtResource("6_elwxs")
-TabContainer/styles/tab_focus = ExtResource("7_byxuu")
-TabContainer/styles/tab_hovered = ExtResource("7_byxuu")
-TabContainer/styles/tab_selected = ExtResource("8_7u315")
-TabContainer/styles/tab_unselected = ExtResource("9_bie8g")
+TabContainer/styles/panel = ExtResource("14_k2t5o")
+TabContainer/styles/tab_disabled = ExtResource("15_exfkq")
+TabContainer/styles/tab_focus = ExtResource("16_xciap")
+TabContainer/styles/tab_hovered = ExtResource("16_xciap")
+TabContainer/styles/tab_selected = ExtResource("17_g8nl2")
+TabContainer/styles/tab_unselected = ExtResource("18_hok7y")
