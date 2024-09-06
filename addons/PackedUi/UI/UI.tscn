@@ -38,7 +38,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_dhl62")
-game_title = "Whatever you want"
 menu_options = Array[String](["Play", "Settings", "Credits", "Quit"])
 background_color = Color(0.242052, 0.18342, 0.265668, 1)
 background = NodePath("background")
@@ -66,7 +65,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("3_ohvov")
 bbcode_enabled = true
-text = "[center]Whatever you want[/center]"
+text = "[center]Game Title Here[/center]"
 scroll_active = false
 
 [node name="buttons_hbox" type="HBoxContainer" parent="MainMenu/vbox1"]

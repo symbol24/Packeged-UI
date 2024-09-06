@@ -1,4 +1,3 @@
-@tool
 class_name MainMenu extends SMenuControl
 
 signal ButtonPressed(id:String)
@@ -18,12 +17,17 @@ var button_list:Array[MainMenuButton] = []
 
 func _ready() -> void:
 	super()
+	
+	if not UI.is_node_ready():
+		await UI.ready
+		
 	_set_game_title(game_title)
 	game_title_label.custom_minimum_size.y = UI.height/3
 	menu_button_vbox.custom_minimum_size.x = UI.width/3
 	hbox_seperator_01.custom_minimum_size.x = UI.width/3
 	hbox_seperator_02.custom_minimum_size.x = UI.width/3
 	_make_buttons(menu_options)
+	
 	if not button_list.is_empty() and not button_list[-1].is_node_ready():
 		await button_list[-1].ready
 
