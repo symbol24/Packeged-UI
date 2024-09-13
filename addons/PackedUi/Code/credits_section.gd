@@ -3,9 +3,17 @@ class_name CreditsSection extends VBoxContainer
 @onready var section_name: RichTextLabel = %section_name
 @onready var grid_of_names: GridContainer = %grid_of_names
 @onready var grid_of_logos: GridContainer = %grid_of_logos
+@onready var hbox_logos: HBoxContainer = %hbox_logos
+@onready var text_hbox: HBoxContainer = %text_hbox
+@onready var credit_section_text: RichTextLabel = %credit_section_text
+@onready var names_hbox: HBoxContainer = %names_hbox
+
+var text_section_text:String:
+	get:
+		return tr(text_section_text)
 
 func set_section(_section_data:CreditSectionData) -> void:
-	section_name.text = "[center]"+_section_data.section_name+"[/center]"
+	section_name.text = _section_data.section_name
 	if not _section_data.logo_images.is_empty():
 		if _section_data.logo_images.size() < 3:
 			grid_of_logos.columns = _section_data.logo_images.size()
@@ -13,6 +21,15 @@ func set_section(_section_data:CreditSectionData) -> void:
 			grid_of_logos.columns = 3
 		var max_height:float = 0.0
 		var x:int = 0
+		
+		# Text section
+		if _section_data.text_section != "":
+			text_section_text = _section_data.text_section
+			credit_section_text.text = text_section_text
+		else:
+			text_hbox.hide()
+		
+		# Logo section
 		for logo in _section_data.logo_images:
 			if logo is Texture2D:
 				var sprite:Sprite2D = Sprite2D.new()
@@ -33,7 +50,9 @@ func set_section(_section_data:CreditSectionData) -> void:
 		for each:Control in grid_of_logos.get_children():
 			each.custom_minimum_size.y = max_height
 	else:
-		grid_of_logos.hide()
+		hbox_logos.hide()
+	
+	# Name section
 	if not _section_data.list_of_names.is_empty():
 		if _section_data.list_of_names.size() < 5:
 			grid_of_names.columns = _section_data.list_of_names.size()
@@ -48,5 +67,9 @@ func set_section(_section_data:CreditSectionData) -> void:
 			new_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			grid_of_names.add_child(new_label)
 	else:
-		grid_of_names.hide()
-				
+		names_hbox.hide()
+
+
+func update_localization() -> void:
+	if text_section_text != "":
+		credit_section_text.text = text_section_text

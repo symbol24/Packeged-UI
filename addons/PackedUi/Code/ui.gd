@@ -8,11 +8,13 @@ signal TogglePauseGame(value:bool)
 signal PopupSmall(text:String, icon:Texture2D)
 signal PopupLarge(severity, title:String, text:String, popup_id:String, icon:CompressedTexture2D, timer:float)
 signal PopupResult(id:String, result:bool)
+signal ButtonPressed(id:String, from:String)
 
 ## Setting your own theme here will make the menu more personalized. Please note that a lot of Type Variations are being used. Have a look at the default_theme.tres in the Packed Ui addon folder. A lot of Style Boxes are used and can be found in the StyleBoxes folder.
 @export var default_theme:Theme
 
 var window_size:Vector2i
+var default_size:Vector2 = Vector2(1280, 720)
 var height:float  = 720
 var width:float = 1280
 var themed_ui:Array = []
@@ -24,8 +26,11 @@ var size_timer:float = 0.0:
 		if size_timer >= size_delay:
 			window_size = _get_window_size(window_size)
 var size_delay:float = 0.5
-var game_name:String
+var game_name:String:
+	get:
+		return tr(game_name)
 var previous_menu:String
+
 
 func _ready() -> void:
 	window_size = _get_window_size(window_size)
@@ -34,19 +39,23 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	_set_theme_ui(_get_themed_ui(), default_theme)
 
+
 func _physics_process(delta: float) -> void:
 	size_timer += delta
 
+
 func _get_window_size(_current:Vector2i) -> Vector2i:
-	if _current != DisplayServer.window_get_size():
-		WindowResized.emit(DisplayServer.window_get_size())
-		return DisplayServer.window_get_size()
+	if _current != Vector2i(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height")):
+		WindowResized.emit(Vector2i(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height")))
+		_current = Vector2i(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
 	return _current
+
 
 func _set_theme_ui(_list:Array, _theme:Theme) ->void:
 	for each in _list:
 		if each.theme != _theme:
 			each.theme = _theme
+
 
 func _get_themed_ui() -> Array:
 	var children = _get_all_children(self)
@@ -55,6 +64,7 @@ func _get_themed_ui() -> Array:
 		if child is Control and child.theme and not themed.has(child):
 			themed.append(child)
 	return themed
+
 
 func _get_all_children(_parent:Node) -> Array:
 	var children = _parent.get_children()

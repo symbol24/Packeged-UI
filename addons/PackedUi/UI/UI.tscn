@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://addons/PackedUi/Code/result_screen.gd" id="8_p1pvi"]
 [ext_resource type="Script" path="res://addons/PackedUi/Code/wrappers/toggle_ui_button.gd" id="9_xcvtp"]
 [ext_resource type="Script" path="res://addons/PackedUi/Code/popups.gd" id="9_y8v47"]
-[ext_resource type="Texture2D" uid="uid://ciphdoorlai41" path="res://icon.svg" id="13_vydkj"]
+[ext_resource type="Texture2D" uid="uid://ciphdoorlai41" path="res://addons/PackedUi/icon.svg" id="13_vydkj"]
 [ext_resource type="Texture2D" uid="uid://4fmfjwd7xr7l" path="res://addons/PackedUi/popup_icon_warning.png" id="14_8eegs"]
 
 [node name="Ui" type="CanvasLayer"]
@@ -38,7 +38,8 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_dhl62")
-menu_options = Array[String](["Play", "Settings", "Credits", "Quit"])
+game_title = "game_title"
+menu_options = Array[String](["Play", "Settings", "Credits"])
 background_color = Color(0.242052, 0.18342, 0.265668, 1)
 background = NodePath("background")
 id = "main_menu"
@@ -102,7 +103,8 @@ anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 script = ExtResource("4_wx7w4")
-menu_name = "Settings"
+menu_name = "settings_title"
+confirm_on_exit = true
 use_simple_audio_manager = false
 background_color = Color(0.390689, 0.491481, 0.64164, 1)
 background = NodePath("options_background")

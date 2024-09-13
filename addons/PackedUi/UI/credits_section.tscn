@@ -14,7 +14,7 @@ script = ExtResource("1_vsdrq")
 
 [node name="section_name" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("2_ehe2w")
 theme_type_variation = &"CreditsRichText"
@@ -23,40 +23,66 @@ text = "test"
 scroll_active = false
 script = ExtResource("3_i7v3l")
 
-[node name="spacer" type="Control" parent="."]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
-[node name="hbox" type="HBoxContainer" parent="."]
+[node name="text_hbox" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 
-[node name="spacer2" type="Control" parent="hbox"]
+[node name="spacer2" type="Control" parent="text_hbox"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 
-[node name="grid_of_logos" type="GridContainer" parent="hbox"]
+[node name="credit_section_text" type="RichTextLabel" parent="text_hbox"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_ehe2w")
+theme_type_variation = &"CreditsText"
+bbcode_enabled = true
+scroll_active = false
+
+[node name="spacer" type="Control" parent="text_hbox"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+
+[node name="hbox_logos" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="spacer2" type="Control" parent="hbox_logos"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+
+[node name="grid_of_logos" type="GridContainer" parent="hbox_logos"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="spacer" type="Control" parent="hbox"]
+[node name="spacer" type="Control" parent="hbox_logos"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 
-[node name="hbox2" type="HBoxContainer" parent="."]
+[node name="names_hbox" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="spacer2" type="Control" parent="hbox2"]
+[node name="spacer2" type="Control" parent="names_hbox"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 
-[node name="grid_of_names" type="GridContainer" parent="hbox2"]
+[node name="grid_of_names" type="GridContainer" parent="names_hbox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="spacer" type="Control" parent="hbox2"]
+[node name="spacer" type="Control" parent="names_hbox"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2

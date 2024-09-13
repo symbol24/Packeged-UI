@@ -3,11 +3,14 @@ class_name DropDownOption extends OptionsOption
 @onready var name_label: Label = %name_label
 @onready var options: OptionButton = %options
 
+
 func _ready() -> void:
 	options.item_selected.connect(_option_changed)
 
+
 func _option_changed(new_option_id:int) -> void:
 	UI.OptionUpdated.emit(id, new_option_id)
+
 
 func set_options(_id:String, _label_text:String, _options:Array[String], _vectors:Array[Vector2i] = []) -> void:
 	if _id:
@@ -25,6 +28,7 @@ func set_options(_id:String, _label_text:String, _options:Array[String], _vector
 				options.set_item_disabled(i, true)
 			i += 1
 
+
 func set_options_with_ids(_id:String, _label_text:String, _options:Array[String], _ids:Array[int]) -> void:
 	if _id:
 		id = _id
@@ -34,6 +38,7 @@ func set_options_with_ids(_id:String, _label_text:String, _options:Array[String]
 	for option in _options:
 		options.add_item(option, i)
 		i += 1
+
 
 func select_value(_value:int) -> void:
 	options.select(_value)

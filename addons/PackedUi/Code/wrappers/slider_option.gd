@@ -11,6 +11,8 @@ var dragging_timer:float = 0.0:
 			dragging_timer = 0.0
 			_update_value()
 var dragging_delay:float = 0.2
+var use_sam:bool = false
+var audio:Node
 
 func _ready() -> void:
 	slider.drag_ended.connect(_drag_ended)
@@ -20,25 +22,37 @@ func _physics_process(delta: float) -> void:
 	if dragging:
 		dragging_timer += delta
 
+
 func _update_value() -> void:
-	UI.OptionUpdated.emit(id, slider.value)
-	print("UI.OptionUpdated.emit(id, slider.value)")
+	if use_sam and audio != null:
+		audio.BusVolumeUpdate.emit(id, slider.value)
+	else:
+		UI.OptionUpdated.emit(id, slider.value)
+
 
 func _drag_ended(_value_changed:bool) -> void:
 	if _value_changed:
-		UI.OptionUpdated.emit(id, slider.value)
-		print("UI.OptionUpdated.emit(id, slider.value)")
+		if use_sam and audio != null:
+			audio.BusVolumeUpdate.emit(id, slider.value)
+		else:
+			UI.OptionUpdated.emit(id, slider.value)
 	if dragging:
 		dragging = false
+		
+	if use_sam and audio == null:
+		push_error("Simple Audio Manager not found. Using signal UI.OptionUpdated. Make sure Audio appears before Packed UI in Projectsettings -> Globals.")
+	
 
 func _start_dragging(): 
 	dragging = true
+
 
 func set_slider(_name:String, _using_sam:bool, _slider_value:float = 1.0) -> float:
 	name = "bus_slider_"+_name
 	id = _name
 	name_label.text = _name
 	if _using_sam:
+		use_sam = _using_sam
 		var audio = get_tree().get_first_node_in_group("SimpleAudioManager")
 		if audio != null:
 			match _name:
@@ -50,12 +64,11 @@ func set_slider(_name:String, _using_sam:bool, _slider_value:float = 1.0) -> flo
 					slider.value = audio.DEFAULT.sfx_volume
 				_:
 					pass
-		else:
-			push_error("Simple Audio Manager not found. Default audio values not set. Make sure to have latest version of Simple Audio Manager installed.")
 	else:
 		slider.value = _slider_value
 
 	return slider.value
+
 
 func set_slider_value(_id:String, _value:float) -> void:
 	if _id == id:

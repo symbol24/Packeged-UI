@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="Packeged UI"
-run/main_scene="res://boot.tscn"
+run/main_scene="res://addons/PackedUi/boot.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://addons/PackedUi/packed_ui.png"
 
 [autoload]
 
@@ -32,7 +32,7 @@ gdscript/warnings/unsafe_call_argument=1
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 
 [editor_plugins]
 

@@ -7,3 +7,12 @@ resize_title,Window Resized,Fenetre Redimensioner,Ca change
 resize_text,The window has been resized. Do you wish to continue with this change?,La fenetre a ete redimensioner. Voulez-vous contier avec ce changement?,Stu correk?
 mode_title,Window Mode Changed,Mode de la fenetre changer,bon kesser ta changer encore?
 mode_text,The window mode has been changed.,Le mode de la fenetre a ete changer. ,"Bon, la window a change de mode, t content  la."
+game_title,[center]Packed UI[/center],[center]UI Empaquetter[/center],[center]Dan' boite[/center]
+Play,Play,Jouer,Jouzer
+Settings,Settings,Parametres,Reglages
+Credits,Credits,Credits,Les noms
+credits_text_1,[center]Credits section in english[/center],[center]Section des credits en francais[/center],[center]Section en quebecois sti[/center]
+created_by,[center]Packed Ui Created by[/center],[center]Packed Ui Creer par[/center],[center]Faite par:[/center]
+changes_title,Changes Made,Changements faits,Ta changer kekchose
+changes_text,"Do you wish to confirm save changes, or cancel and reset to defaults?",Voulez-vous confirmer les changements ou canceller et remettre par defaults?,Tu confirme ou tu cancel?
+settings_title,[center]Settings[/center],[center]Parametres[/center],[center]Reglages[/center]

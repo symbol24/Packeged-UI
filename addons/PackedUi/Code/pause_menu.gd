@@ -2,9 +2,9 @@ class_name PauseMenu extends SMenuControl
 
 ## If TRUE, emits signal UI.TogglePauseGame as false to be used by your code to toggle the pause state of your game.
 @export var use_pause_game_signal:bool = true
-## If FALSE, removes the spacer and pause_page_title RichTextLabel on runtime.
+## If FALSE, removes the spacer and pause_page_title RichTextLabel on runtime. 
 @export var display_page_title:bool = true
-## Name displayed at the top of the menu on runtime.
+## Name displayed at the top of the menu on runtime. BBCode is supported.
 @export var page_title:String
 ## If TRUE, sets the position of the back button through code.
 @export var set_position_of_buttons:bool = true
@@ -19,6 +19,7 @@ class_name PauseMenu extends SMenuControl
 @onready var settings_btn: Button = %settings_btn
 @onready var main_menu_btn: Button = %main_menu_btn
 
+
 func _ready() -> void:
 	super()
 	
@@ -26,7 +27,7 @@ func _ready() -> void:
 		pause_page_title.hide()
 		spacer.hide()
 	else:
-		pause_page_title.text = "[center]" + page_title + "[/center]"
+		pause_page_title.text = page_title
 		
 	pause_back_btn.pressed.connect(_back_btn_pressed)
 	main_menu_btn.pressed.connect(_main_menu_btn_pressed)
@@ -52,11 +53,13 @@ func _ready() -> void:
 	if not main_menu_button:
 		main_menu_btn.hide()
 
+
 func _back_btn_pressed() -> void:
 	_toggle_control(id, false, id)
 	
 	if use_pause_game_signal:
 		UI.TogglePauseGame.emit(false)
+
 
 func _main_menu_btn_pressed() -> void:
 	UI.ReturnToMainMenu.emit()

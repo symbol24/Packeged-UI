@@ -1,8 +1,8 @@
 class_name MainMenu extends SMenuControl
 
-signal ButtonPressed(id:String)
-
-## Sets the text of the game title lavel on runtime. BBCode is accepted.
+## If TRUE, will ignore name in Game Title parameter and fetch name from the Project settings.
+@export var get_name_from_properties:bool = false
+## Sets the text of the game title lavel on runtime. BBCode is supported.
 @export var game_title:String = "Game Title Here"
 ## Listing the menu buttons here will create buttons on runtime in the Main Menu. Pressing the button emits a signal (ButtonPressed) with the id listed here.
 @export var menu_options:Array[String] = []
@@ -15,12 +15,13 @@ signal ButtonPressed(id:String)
 
 var button_list:Array[MainMenuButton] = []
 
+
 func _ready() -> void:
 	super()
 	
 	if not UI.is_node_ready():
 		await UI.ready
-		
+	
 	_set_game_title(game_title)
 	game_title_label.custom_minimum_size.y = UI.height/3
 	menu_button_vbox.custom_minimum_size.x = UI.width/3
@@ -31,9 +32,15 @@ func _ready() -> void:
 	if not button_list.is_empty() and not button_list[-1].is_node_ready():
 		await button_list[-1].ready
 
+
 func _set_game_title(_value:String = "") -> void:
-	game_title_label.text = "[center]"+_value+"[/center]"
-	UI.game_name = _value
+	if get_name_from_properties:
+		UI.game_name = ProjectSettings.get_setting("application/config/name")
+		game_title_label.text = UI.game_name
+	else:
+		game_title_label.text = _value
+		UI.game_name = _value
+
 
 func _make_buttons(_list:Array[String]) -> Array[MainMenuButton]:
 	var buttons:Array[MainMenuButton] = []
@@ -65,12 +72,14 @@ func _make_buttons(_list:Array[String]) -> Array[MainMenuButton]:
 		x += 1
 	return buttons
 
+
 func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 	if id == "":
 		push_error(name, " does not have an id set.")
 	else:
 		UI.previous_menu = _previous
 		if _id == id:
+			_set_game_title(game_title)
 			set_deferred("visible", _value)
 			if _value:
 				if not button_list.is_empty():
@@ -78,32 +87,6 @@ func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 		else:
 			set_deferred("visible", not _value)
 
-func button_pressed(_id:String) -> void:
-	var signal_sent:bool = false
-	match _id.to_lower():
-		"play":
-			ButtonPressed.emit(_id.to_lower())
-			signal_sent = true
-		"start":
-			ButtonPressed.emit(_id.to_lower())
-			signal_sent = true
-		"continue":
-			ButtonPressed.emit(_id.to_lower())
-			signal_sent = true
-		"options":
-			UI.ToggleUi.emit(_id.to_lower(), true, id)
-			signal_sent = true
-		"settings":
-			UI.ToggleUi.emit(_id.to_lower(), true, id)
-			signal_sent = true
-		"credits":
-			UI.ToggleUi.emit(_id.to_lower(), true, id)
-			signal_sent = true
-		"quit":
-			ButtonPressed.emit(_id.to_lower())
-			signal_sent = true
-		_:
-			push_warning("Button name unrecognized. Suggest using 'Play', 'Start', 'Continue', 'Options', 'Settings', 'Credits', or 'Quit'")
 
-	#if signal_sent:
-		#_toggle_control(id, false)
+func button_pressed(_id:String) -> void:
+	UI.ButtonPressed.emit(_id.to_lower(), id)

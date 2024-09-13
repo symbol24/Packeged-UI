@@ -12,7 +12,7 @@ enum WindowOption {
 const SLIDER_OPTION = preload("res://addons/PackedUi/UI/slider_option.tscn")
 const DROP_DOWN_OPTION = preload("res://addons/PackedUi/UI/drop_down_option.tscn")
 
-## Name displayed at the top of the menu on runtime.
+## Name displayed at the top of the menu on runtime. BBCode is supported.
 @export var menu_name:String
 ## Name displayed in the tab selector when more than 1 tab is present in the tab container._add_constant_central_force
 @export var first_tab_name:String = "Basic"
@@ -105,10 +105,10 @@ var new_language:int
 var changes_made:bool = false
 
 # Loacalition string ids
-var resize_title:String = tr("resize_title")
-var resize_text:String = tr("resize_text")
-var changes_title:String = tr("changes_title")
-var changes_text:String = tr("changes_text")
+var resize_title:String = "resize_title"
+var resize_text:String = "resize_text"
+var changes_title:String = "changes_title"
+var changes_text:String = "changes_text"
 
 
 func _ready() -> void:
@@ -129,7 +129,7 @@ func _ready() -> void:
 		option_back_btn.position = (Vector2(UI.width, UI.height)*0.95) - option_back_btn.size
 	
 	if menu_name:
-		options_page_title.text = "[center]"+menu_name+"[/center]"
+		options_page_title.text = menu_name
 
 	if display_audio_options:
 		_build_sound_options(audio_section_name, bus_names)
@@ -171,6 +171,10 @@ func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 func _build_sound_options(_name:String, _buses:Array[String]) -> void:
 	var title = _add_section_title(_name)
 	basics_vbox.add_child(title)
+	if use_simple_audio_manager:
+		var audio:Node = get_tree().get_first_node_in_group("SimpleAudioManager")
+		if audio == null:
+			push_error("Simple Audio Manager not found. Default audio values not set. Make sure Audio appears before Packed UI in Projectsettings -> Globals.")
 	for each in _buses:
 		var slider = SLIDER_OPTION.instantiate() as SliderOption
 		basics_vbox.add_child(slider)
